@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.convention.result.path" value="/"></constant>
+
+	<package name="user" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="authentication"
+				class="com.journaldev.struts2.interceptors.AuthenticationInterceptor"></interceptor>
+			<interceptor-stack name="authStack">
+				<interceptor-ref name="authentication"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="authStack"></default-interceptor-ref>
+
+		<global-results>
+			<result name="login" type="redirect">index.jsp</result>
+		</global-results>
+			
+
+		<action name="login" class="com.journaldev.struts2.actions.LoginAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success">/home</result>
+			<result name="input">login.jsp</result>
+		</action>
+		<action name="logout" class="com.journaldev.struts2.actions.LogoutAction">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success">index.jsp</result>
+			<result name="input">login.jsp</result>
+		</action>
+		<action name="home" class="com.journaldev.struts2.actions.WelcomeAction">
+			<result name="success">/home</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="addUser" class="com.journaldev.struts2.actions.RegisterAction">
+			<result name="success">/addUser</result>
+			<result name="input">/addUser</result>
+			<result name="login">/addUser</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="mapMonuments" class="com.journaldev.struts2.actions.WelcomeAction">
+			<result name="success">/mapMonuments</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="addMonument" class="com.journaldev.struts2.actions.voyagiste">
+			<result name="success">/addMonument</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="storeMonument" class="com.journaldev.struts2.actions.voyagiste">
+			<result name="success">/storeMonument</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="editMonuments" class="com.journaldev.struts2.actions.voyagiste">
+			<result name="success">/editMonuments</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="delete" class="com.journaldev.struts2.actions.voyagiste">
+			<result name="success">/delete</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="listMonuments" class="com.journaldev.struts2.actions.WelcomeAction">
+			<result name="success">/listMonuments</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="addDepartement" class="com.journaldev.struts2.actions.voyagiste">
+			<result name="success">/addDepartement</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="storeDepartement" class="com.journaldev.struts2.actions.voyagiste">
+			<result name="success">/storeDepartement</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="addLieu" class="com.journaldev.struts2.actions.voyagiste">
+			<result name="success">/addLieu</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="storeLieu" class="com.journaldev.struts2.actions.voyagiste">
+			<result name="success">/storeLieu</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="addCelebrity" class="com.journaldev.struts2.actions.voyagiste">
+			<result name="success">/addCelebrity</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="storeCelebrity" class="com.journaldev.struts2.actions.voyagiste">
+			<result name="success">/storeCelebrity</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="storeUser" class="com.journaldev.struts2.actions.RegisterAction">
+			<result name="success">/storeUser</result>
+			<result name="input">/storeUser</result>
+			<result name="login">/storeUser</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="unMonumentd" class="com.journaldev.struts2.actions.WelcomeAction">
+			<result name="success">/unMonumentd</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<action name="profile" class="com.journaldev.struts2.actions.WelcomeAction">
+			<result name="success">pages/profile.jsp</result>
+			<result name="forbidden">forbidden.jsp</result>
+		</action>
+		<!-- <action name="storeDepartement" class="com.journaldev.struts2.actions.WelcomeAction">
+			<result name="success">/storeDepartement</result>
+		</action> -->
+
+	</package>
+
+</struts>
