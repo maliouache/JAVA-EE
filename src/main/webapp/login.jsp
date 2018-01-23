@@ -22,8 +22,8 @@
 	<div class="container" style="">
 		<h2>Athentifiez vous !</h2>
 		<s:form  action="/login">
-			<s:textfield name="email" class="form-control" label="Email" placeholder="Enter Email"></s:textfield>
-			<s:textfield name="password" class="form-control" label="Password:" type="password"></s:textfield>
+			<s:textfield name="email" class="form-control" label="Email" placeholder="Enter Email" ></s:textfield>
+			<s:textfield name="password" class="form-control" label="Password:" type="password" ></s:textfield>
 			<s:submit value="Login" class="btn btn-primary"></s:submit>
 		</s:form>
 		Vous n'avez pas de compte? <a href="addUser">Inscrivez</a> vous.

@@ -21,6 +21,6 @@ public interface IDao {
 	void deleteMonumentByCodeM(int mon);
 	List<Departement> getAllDepartements();
 	Monument getOneMonument(int id);
-	void addUser(User c);
+	int addUser(User c);
 	User getUser(String email, String pass);
 }

@@ -3,8 +3,10 @@ package com.projetjee.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.validation.ConstraintViolationException;
 
 import com.projetjee.pojos.AssocieA;
 import com.projetjee.pojos.Celebrite;
@@ -92,9 +94,32 @@ public class Dao implements IDao{
 		return em.find(Monument.class, id);
 	}
 
-	public void addUser(User c) {
+	public int addUser(User c) {
 		// TODO Auto-generated method stub
-		em.persist(c);
+		try{
+			Query query=em.createQuery("select u from User u where u.email=:x");
+			query.setParameter("x", c.getEmail());
+			query.getSingleResult();
+		}
+		catch (NoResultException e) {
+			// TODO: handle exception
+			em.persist(c);
+			em.flush();
+			return 0;
+		}
+		return 1;
+//		try {
+//			em.persist(c);
+//			em.flush();
+//			return 0;
+//		}
+//		catch (ConstraintViolationException e) {
+//			// TODO: handle exception
+//			System.out.println(e.getMessage());
+//			System.out.println("XXX: ConstraintViolationException");
+//			return 1;
+//		}
+		
 	}
 
 	public User getUser(String email, String pass) {

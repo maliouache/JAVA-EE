@@ -75,9 +75,9 @@ public class SecDao implements ISecDao{
 		return dao.getOneMonument(id);
 	}
 
-	public void addUser(User c) {
+	public int addUser(User c) {
 		// TODO Auto-generated method stub
-		dao.addUser(c);
+		return dao.addUser(c);
 	}
 
 	public User getUser(String email,String pass) {

@@ -1,15 +1,16 @@
 package com.projetjee.controllers;
 
 import java.util.List;
-import java.util.Map;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.opensymphony.xwork2.ActionInvocation;
 import com.projetjee.pojos.AssocieA;
 import com.projetjee.pojos.Celebrite;
 import com.projetjee.pojos.Departement;
@@ -17,7 +18,8 @@ import com.projetjee.pojos.Lieu;
 import com.projetjee.pojos.Monument;
 import com.projetjee.pojos.User;
 import com.projetjee.securedao.ISecDao;
-
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 @Controller
 public class Controller1 {
 	@Autowired
@@ -149,11 +151,28 @@ public class Controller1 {
 		return "addUser";
 	}
 	@RequestMapping("/storeUser")
-	public String sauverUtilisateur(User c,Model model){
-		secDao.addUser(c);
-		model.addAttribute("User", new User());
-		model.addAttribute("msg", "Inscription réussie! Authentifiez vous pour continuer.");
+	public String sauverUtilisateur(@ModelAttribute("User") @Valid final User c,
+            final BindingResult bindingResult, final Model model){
+		if (bindingResult.hasErrors()) {
+			List<ObjectError> err=bindingResult.getAllErrors();
+			System.out.println(err.toString());
+			String errcum="";
+			for(ObjectError oneErr:err){
+	            errcum=errcum+"***"+oneErr.getDefaultMessage()+"</br>";
+			}
+            model.addAttribute("errors", "La validation du formulaire a échoué</br>"+errcum);
+            return "addUser";
+        }
+		int resp=secDao.addUser(c);
+		if (resp==0){
+			model.addAttribute("User", new User());
+			model.addAttribute("msg", "Inscription réussie! Authentifiez vous pour continuer.");
+		}
+		if (resp==1){
+            model.addAttribute("errors", "l'adresse mail existe déjà");
+		}
 		return "addUser";
+
 	}
 	
 }

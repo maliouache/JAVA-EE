@@ -15,6 +15,7 @@
 
 	<h2>Saisissez vos informations !</h2>
 		<p style="color:green">${msg}</p>
+		<p style="color:red">${errors}</p>
 	<sf:form modelAttribute="User" method="post"
 		action="storeUser" class="form-horizontal">
 		<div class="form-group">
@@ -45,7 +46,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-sm-2" for="email">email: </label>
+			<label class="control-label col-sm-2" for="email" >email: </label>
 			<div class="col-sm-10">
 				<sf:input type="email" class="form-control" path="email" name="email"/>
 			</div>
