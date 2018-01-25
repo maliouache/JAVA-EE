@@ -24,12 +24,12 @@
 	</bean>
 		<!--  -->
 	<bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
-	<property name="persistenceXmlLocations">
-		<list>
-			<value>classpath*:configs/persistence.xml</value>
-		</list>
-	</property>
-	<property name="defaultDataSource" ref="dataSource"></property>
+		<property name="persistenceXmlLocations">
+			<list>
+				<value>classpath*:configs/persistence.xml</value>
+			</list>
+		</property>
+		<property name="defaultDataSource" ref="dataSource"></property>
 	</bean>
 		<!--  -->
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
